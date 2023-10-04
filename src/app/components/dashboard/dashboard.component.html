@@ -1,0 +1,553 @@
+
+<div class="spinner-overlay" *ngIf="_show_spinner" >
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<div style="position:  absolute; width: 100%; z-index: 10;">
+  <app-login *ngIf="showlogin" 
+             (logSuccessChange)="onLogSuccessChange($event)">
+  </app-login>
+</div>
+
+<section class="p-1"
+         [ngStyle]="{ 'background': _color_console, 'height': '100vh' }"
+         *ngIf="_dashboard">
+         <div class="d-flex align-items-center justify-content-center h-100" *ngIf="_menu_giant_app" >
+            <app-initchoice (appchoice)="recibirAppChoice($event)"></app-initchoice>
+         </div>
+<div *ngIf="_task_manager">
+<section class=" carga p-1" id="carga">
+<section  class="contsection shadow-lg rounded-2"
+          [ngStyle]="{ 'background': _color_console }">
+          <div class="response">
+            <section class="header d-flex justify-content-between align-items-center">
+              <div class="p-3 d-flex align-items-center justify-content-between w-100">
+                <div class="colopick text-light"
+                     style="background-color: orangered; color: #444 !important;"
+                     title="Menu de funciones de orangeapp"
+                     (click)="guardarPersistencia('menuview', _community_show); _community_show = !_community_show; _show_btn_mwnu = !_show_btn_mwnu; calcuWidth(); _show_msj = !_show_msj" >
+                     <i class="pi pi-bars"></i>
+                </div>
+                <div class="colorpick d-flex p-2"  >
+                  <div class="colopick" *ngIf="_color_setts"
+                       title="Color de fondo de la aplicación">
+                    <input type="color" class="colorp" 
+                           [(ngModel)]="_color_console"
+                           (change)="cambiarColorConsola(_color_console)">
+                  </div>
+                  <div class="colopick" title="Color del texto de la aplicación" *ngIf="_color_setts">
+                    <input type="color" class="colorp" 
+                           [(ngModel)]="_color_console_letras"
+                           (change)="cambiarColorConsolaTexto(_color_console_letras)">
+                  </div>
+                  <div class="colopick" *ngIf="_color_setts">
+                    <input type="color" class="colorp" title="Color de la caja de publicaciones"
+                           [(ngModel)]="_color_caja_mensajes"
+                           (change)="cambiarColorCajaMensajes(_color_caja_mensajes)">
+                  </div>
+
+                  <div class="colopick"
+                       id="minimenu"
+                       (click)="_range_setts = !_range_setts; _search_setts = false; _color_setts=false  "
+                       style="color: orangered !important;" >
+                       <i class="pi pi-window-maximize"></i>
+                  </div>
+                  <div class="colopick"
+                       id="minimenu"
+                       (click)="_color_setts = !_color_setts; _search_setts = false; _range_setts = false;"
+                       style="color: orangered !important;" >
+                       <i class="pi pi-pencil"></i>
+                  </div>
+                  <div class="colopick" id="minimenu"
+                       (click)="_search_setts = !_search_setts; _color_setts = false; _range_setts = false;"
+                       style="color: orangered !important;" >
+                       <i class="pi pi-search"></i>
+                  </div>
+                </div>
+                <div class="filter p-2 w-50" *ngIf="_search_setts" >
+                  <input type="text" title="Filtra tus publicaciones por títulos, o subtítulos"
+                         class="inputsearch w-100 bg-dark text-warning rounded-pill p-2"
+                         [(ngModel)]="filter"
+                         (keyup)="filternotes()"
+                         placeholder="Filtro de publicaciones...">
+                </div>
+              </div>
+            </section>
+            <hr class="m-0" style="border: solid 1px rgb(209, 209, 209);">
+              <div class="msjview p-4">
+
+                <!-- CAJA DEL MENU DE ACCIONES INICIO -->
+
+                <div class="box-community animate__animated animate__fadeInLeft" *ngIf="_community_show">
+                  <div class="text-warning p-2 m-2 d-flex justify-content-between align-items-center" >
+                    <span> <i class="pi pi-map" ></i> Menú de acciones</span>
+                    <span class="colopick" (click)="_community_show = !_community_show; widthmsj = '100%';" >
+                      <i class="pi pi-times-circle"></i>
+                    </span>
+                  </div>
+                  <div>
+                    <section class="header-community p-3 w-100">
+                      <div class="btn btn-outline-warning rounded-pill btn-sm text-light w-100"
+                           (click)="_comunnity_view = !_comunnity_view; _comunidades_view = false; _invitaciones_view = false;">
+                           <i class="pi pi-plus"></i>
+                           <span>Crear una comunidad</span>
+                      </div>
+                    </section>
+                    <section class="p-3 bg-dark text-light animate__animated animate__fadeInLeft" *ngIf="_comunnity_view" >
+
+                      <form [formGroup]="communityForm" (ngSubmit)="submitCommunity()" >
+                        <!-- <span class="text-light" >Crear una comunidad:</span> -->
+                        <div class="w-100">
+                          <input type="text"
+                                 class="textarea-console p-2 w-100"
+                                 [ngStyle]="{'color': _color_console_letras}"
+                                 formControlName="nombrecomunity" 
+                                 #nombrecomunity
+                                 id="nombrecomunity"
+                                 placeholder="Los trabajadores...">
+                        </div>
+                        <div class="w-100 d-flex justify-content-between align-items-center">
+                          <div>
+                            <input type="color"
+                                   class="textarea-console rounded-2 "
+                                   [ngStyle]="{'color': _color_console_letras}"
+                                   formControlName="color"
+                                   #color id="color">
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <div style="cursor: pointer;"
+                                 (click)="openDialogIcon()"
+                                 class="colorpick d-flex p-2">
+                                 <i class="pi pi-th-large"></i>
+                            </div>
+
+                            <div style="opacity: 0.6;">
+                              <i [class]="iconchoice" ></i>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class=" w-100 " >
+
+                          <div class="persons-invite" >
+                            <li class="listsusers" *ngFor="let usuario of usuariocomminitylist"
+                                (click)="eliminarUsuarioCommunity(usuario)" >
+                                {{usuario.nombre}}
+                                <span class="text-info" >
+                                  {{usuario.coduser}}
+                                </span>
+                            </li>
+                          </div>
+                        </div>
+                        <button class="btn btn-warning btn-sm w-100 mt-2"  type="submit" >
+                          <i [class]="icon_create_community" ></i> {{_act_community}}
+                        </button>
+                      </form>
+
+                    </section>
+                  </div>
+                  <div class="mt-2 animate__animated animate__fadeInLeft" *ngIf="_comunnity_view" >
+                    <section class="p-3 bg-dark text-light" style="height: 45vh; overflow-y: auto;">
+                      <span class="p-2">Usuarios: ({{listausuarios.length}}) </span>
+                      <hr>
+                      <li class="listsusers" *ngFor="let ususarios of listausuarios" 
+                         (click)="asignarUsuarioCommunity(ususarios);" >
+                        {{ususarios.nombre}} <span class="text-info" > {{ususarios.coduser}} </span>
+                      </li>
+                    </section>
+                  </div>
+
+                  <section class="header-community p-3 w-100">
+                    <div class="btn btn-outline-warning rounded-pill btn-sm text-light w-100" 
+                         (click)="obtenerComunidadesPertenecientes(); _comunidades_view = !_comunidades_view;  _comunnity_view = false; _invitaciones_view = false" >
+                         <i class="pi pi-book"></i>
+                         <span>Comunidades</span>
+                    </div>
+                  </section>
+                  <div class="mt-2 animate__animated animate__fadeInLeft" *ngIf="_comunidades_view">
+                    <section class="p-3 bg-dark text-light" style="height: 65vh; overflow-y: auto;">
+                      
+                      <span class="p-2">Tareas personales: </span>
+                      <div class="btn-group  w-100 d-flex flex-column" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio"
+                               class="btn-check w-100"
+                               name="btnradio"
+                               id="btn" (change)="onRadioSelectPersonal();  _community_show = !_community_show; widthmsj = '100%'"
+                               autocomplete="off">
+                        <label class="btn btn-outline-info rounded-pill w-100" for="btn">
+                          <i class="pi pi-user"></i>
+                          <span> Tareas personales </span>
+                        </label>
+                      </div>
+                      <hr>
+                      <span class="p-2">Comunidades que administro: ({{comunidadeslistaCreadas.length}}) </span>
+                      <hr>
+                      <div class="btn-group w-100 d-flex flex-column" 
+                           role="group"
+                           aria-label="Basic radio toggle button group">
+                            <!-- <div  class="lista-user-community"
+                                  *ngIf="listaUsuariosComunidad.length > 0">
+                                  <i class="pi pi-paperclip"></i> Usuarios que pertenecen a esta comunidad
+                                  <hr>
+                                  <div *ngFor="let userinvited of listaUsuariosComunidad" >
+                                     {{userinvited.usuarioInvitado}}
+                                  </div>
+                            </div> -->
+                        <div *ngFor="let comunidades of comunidadeslistaCreadas; let i = index" class="d-flex flex-column w-100">
+                          <input  type="radio" 
+                                  (change)="onRadioSelect(comunidades); _community_show = !_community_show; widthmsj = '100%' "
+                                  class="btn-check w-100"
+                                  name="btnradio"
+                                  [id]="'btns'+i"
+                                  
+                                  autocomplete="off">
+                                  <label class="btn btn-comu d-flex justify-content-between align-items-center w-100"                                         
+                                         [ngStyle]="{'border': 'solid 1px ' + comunidades.color, 'color': comunidades.color}"
+                                         [for]="'btns'+i">
+                                         <div>
+                                            <i [class]=" comunidades.icon "></i> &nbsp;&nbsp;
+                                            <span> {{comunidades.nombrecomunity}} </span>
+                                         </div>
+                                         <div class="d-flex" >
+                                         <div class="out-comu-edit" 
+                                              (click)="catchDataCommunityEdit(comunidades)">
+                                              <i class="pi pi-pencil"></i>
+                                         </div>
+                                         <div class="out-comu" (click)="gestionarComunidad( comunidades.codcomunity, 100, 'En-suspencion' )">
+                                          <i class="pi pi-times"></i>
+                                        </div>
+                                       </div>
+                                  </label>
+                                  
+                        </div>
+                      </div>
+                      <hr>
+                      <span class="p-2">Comunidades en las que estoy: ({{comunidadeslistaPertenezco.length}}) </span>
+                      <hr>
+                      <div class="btn-group w-100 d-flex flex-column" 
+                           role="group"
+                           aria-label="Basic radio toggle button group">
+                        <div *ngFor="let comunidadesp of comunidadeslistaPertenezco; let i = index"
+                             class="d-flex flex-column w-100">
+                          <input type="radio" 
+                                 class="btn-check w-100"
+                                 (change)="onRadioSelect(comunidadesp)"
+                                 name="btnradio"  [id]="'btn'+i" autocomplete="off">
+                                 <label class="btn btn-comu  d-flex justify-content-between align-items-center w-100"
+                                 [ngStyle]="{'border': 'solid 1px ' + comunidadesp.color, 'color': comunidadesp.color}"
+                                 [for]="'btn'+i">
+                                 <div>
+                                    <i [class]=" comunidadesp.icon "></i> &nbsp;&nbsp;
+                                    {{comunidadesp.nombrecomunity}}
+                                 </div>
+                                 <div class="out-comu" (click)="EliminarComunidadUsuario( comunidadesp.codcomunity )" >
+                                    <i class="pi pi-sign-out" ></i>
+                                 </div>
+                          </label>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  
+                  <section class="header-community p-3 w-100">
+                    <div class="btn btn-outline-warning rounded-pill btn-sm text-light w-100" 
+                         (click)="_invitaciones_view = !_invitaciones_view; invitaciones(); _comunnity_view = false; _comunidades_view = false; widthmsj = '100%';" >
+                         <i class="pi pi-envelope"></i>
+                         <span>Invitaciones Pendientes</span>
+                    </div>
+                  </section>
+                  <div class="mt-2 animate__animated animate__fadeInLeft" *ngIf="_invitaciones_view" >
+                    <section class="p-3 bg-dark text-light" style="height: 45vh; overflow-y: auto;">
+                      <span class="p-2">Invitaciones Pendientes: ({{listainvitacionespendientes.length}})</span>
+                      <hr>
+                      <li class="listsusers d-flex" *ngFor="let invitpend of listainvitacionespendientes"  >
+                        <div class="d-flex p-1">
+                          <div class="colopick" 
+                               (click)="actualizarEstadoInvitacion( 1, 1, 1, invitpend.codcomunity ); _community_show = !_community_show; widthmsj = '100%';">
+                            <i class="pi pi-check"></i>
+                          </div>
+                          <div class="colopick"
+                               (click)="actualizarEstadoInvitacion(0, 0, 1, invitpend.codcomunity); _community_show = !_community_show; widthmsj = '100%';" >
+                            <i class="pi pi-thumbs-down"></i>
+                          </div>
+                        </div>
+                        <div class="p-1">
+                          {{invitpend.nombreinvita | titlecase}} <span class="text-info" > {{invitpend.emailinvita}} </span>
+                          <br>
+                          <small>{{invitpend.nombrecomunity}}</small>
+                        </div>
+                      </li>
+                      <hr>
+                      <span class="p-2">Invitaciones Rechazadas: ({{listainvitacionesrechazadas.length}}) </span>
+                      <hr>
+                      <li class="listsusers d-flex" *ngFor="let invitpend of listainvitacionesrechazadas">
+                        <div class="d-flex p-1">
+                          <div class="colopick" (click)="actualizarEstadoInvitacion( 1, 0, 2, invitpend.codcomunity); invitaciones();">
+                            <i class="pi pi-arrow-right-arrow-left"></i>
+                          </div>
+                          <div class="colopick" (click)="eliminarInvitacion(invitpend.id)">
+                            <i class="pi pi-trash"></i>
+                          </div>
+                        </div>
+                        <div class="p-1">
+                          {{invitpend.nombreinvita | titlecase}}
+                          <span class="text-info" >
+                            {{invitpend.emailinvita}}
+                          </span>
+                          <br>
+                          <small>{{invitpend.nombrecomunity}}</small>
+                        </div>
+                      </li>
+                    </section>
+                  </div>
+                  <section class="header-community p-3 w-100">
+                    <div class="btn btn-outline-danger rounded-pill btn-sm text-light w-100"
+                         (click)="closessesion()">
+                         <i class="pi pi-sign-out"></i> &nbsp;
+                         <span>Cerrar Sesión</span>
+                    </div>
+                  </section>
+                </div>
+
+                <!-- CAJA DEL MENU DE ACCIONES FIN -->
+
+                <!-- VISUALIZADOR DE TAREAS INICIO -->
+
+                <div class="d-flex flex-column" [ngStyle]="{'width': widthmsj}" >
+                <div class="title-request bg-dark text-light  p-2 rounded-3 d-flex flex-wrap justify-content-between align-items-center">
+
+                  <div class="d-flex align-items-center flex-wrap justify-content-center">
+                      <div class="d-flex" > 
+                        <div class="colopick" 
+                             (click)="cambiarOrdenDePublicaciones()"
+                             [ngClass]="{'active': botonActivo}"
+                             title=" Organiza tus prublicaciones por fecha de publicación de manera ascendente o descenente  ">
+                             <i class="pi pi-calendar"></i>
+                        </div>
+                        <div class="colopick"
+                             [ngClass]="{'active': botonActivoCheck}"
+                             (click)="cambiarOrdenDePublicacionesTerminadas()"
+                             title="Organiza tus prublicaciones por tareas terminadas">
+                             <i class="pi pi-check"></i>
+                        </div>
+                        <div class="colopick" 
+                             [ngClass]="{'active': botonActivoPendientes}"
+                             (click)="cambiarOrdenDePublicacionesPendientes()"
+                             title="Organiza tus prublicaciones por tareas pendientes">
+                             <i class="pi pi-clock"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex">
+                        &nbsp;&nbsp;
+                        <div> Esta sección tiene </div>
+                        <div>
+                          &nbsp;<strong> {{listamensajesguardados.length}} </strong>&nbsp;
+                        </div>
+                        <div>&nbsp;publicaciones.</div>
+                      </div>
+                  </div>
+                  <div class="contendatauser d-flex flex-wrap align-items-center justify-content-center">
+                    <span class="p-2" [ngStyle]="{'color': 'whitesmoke'}">
+                      <span [ngStyle]="{'color': colorcomm}">
+                        <i [class]="iconcomm" ></i> &nbsp; {{localComm | uppercase}}
+                      </span>
+                      <br>
+                      <small class="text-secondary" style="font-size: 7pt;">
+                        {{selectedRadioValue}}
+                      </small>
+                    </span> &nbsp;&nbsp;
+                    <!-- (click)="gestionarComunidad( nameuser, 2, '---' )"  -->
+                    <div class="d-flex justify-content-center" >
+                      <span [ngStyle]="{'color': _color_console_letras}"
+                            class="d-flex align-items-start flex-column justify-content-center"
+                            style="text-align: center;">
+                            <small class="bienvenido text-secondary" >Bienvenid@</small>
+                            <span>{{nameuser | uppercase}}</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <section [class]="grid_style">
+                <div *ngFor="let msj of listamensajesguardados"
+                     class="msj d-flex align-items-center animate__animated animate__FadeIn "
+                     [ngStyle]="{'color': _color_console_letras, 'background': _color_caja_mensajes, 'border': 'groove 1px ' + msj.color}"
+                     (dblclick)="catchData(msj)">
+                     <div class="btnsets p-2  d-flex flex-column justify-content-center align-items-center">
+                        <div class="iconpi"
+                             [ngStyle]="{'color': msj.color, }"
+                             (dblclick)="cambiarEstadoMSJ(1, msj.coduser, msj.codmsj)">
+                             <i [class]="msj.icon"></i>
+                        </div>
+                        <button mat-mini-fab
+                                color="warn"
+                                *ngIf="msj.actionsdelete"
+                                (click)="openDialog(msj.codmsj)"
+                                class="d-flex align-items-center mt-2">
+                                <i class="pi pi-trash"></i>
+                        </button>
+                        <button mat-mini-fab
+                                *ngIf="msj.show"
+                                color="primary"
+                                (click)=" actualizarTareaTerminada(msj.codmsj, msj.codcomunity)"
+                                class="d-flex align-items-center mt-2">
+                                <i class="pi pi-check"></i>
+                        </button>
+                        <button mat-mini-fab
+                                color="primary" (click)="getDataForComment(msj.codmsj, msj.nombre)"
+                                class="d-flex align-items-center mt-2">
+                                <i class="pi pi-comments"></i>
+                        </button>
+                     </div>
+                     <div class="d-flex w-100 flex-column p-1">
+                       <div style="font-size: 19pt; word-wrap: break-word; width: 90%; "
+                            [ngStyle]="{'color': _color_console_letras}"
+                            [innerHTML]="sanitize(msj.title)">
+                       </div>
+                       <div class="mt-2"
+                            style="word-wrap: break-word; width: 90%; " 
+                            [ngStyle]="{'color': _color_console_letras}"
+                            [innerHTML]="sanitize(msj.subtitle)"></div>                            
+                       <div class="desmsj mt-2 "
+                            style="word-wrap: break-word; width: 90%; overflow-x: auto;"
+                            [ngStyle]="{'color': _color_console_letras}"
+                            [innerHTML]="sanitize(msj.description)"></div>
+                            
+                        <div class="d-flex justify-content-between align-items-center flex-wrap w-100">
+                          <div class="contentreacctions d-flex flex-column" >
+                            
+                            <div class="d-flex flex-column p-2 rounded-3" style="background-color: rgba(0, 0, 0, 0.166); " >
+                              <small class="text-warning d-flex align-items-center">
+                                <i class="pi pi-calendar" ></i> &nbsp; Fecha de registro: {{msj.feccrea | date: 'short'}} - Enviado por: {{msj.nombre | uppercase}}
+                              </small>
+                              <br>
+                              <small class="text-success d-flex align-items-center" *ngIf="msj.finalizadas" >
+                                <i class="pi pi-verified" ></i> &nbsp; Fecha de finzalización: {{msj.fechacumple | date: 'short'}} 
+                              </small>
+                            </div>
+                            <div class="d-flex justify-content-start m-1" >
+                            <div class="iconpi" (click)="icon_show = !icon_show" >
+                              <i class="pi pi-heart-fill"></i>
+                            </div>
+                            <div class="emot-contain p-2 mb-1 d-flex align-items-center animate__animated animate__fadeIn " *ngIf="icon_show" >
+                              <div *ngFor="let emoticones of listEmoticones" [title]="emoticones.emoticon_nombre"
+                                   class="emot d-flex justify-content-between align-items-center "
+                                   (click)="guardarReactionPost(emoticones, msj.codmsj); icon_show = false;" >
+                                   <img class="emoticones-imagenes"  [src]="emoticones.emoticon_icon">
+                              </div>
+                              
+                            </div>
+                            <div *ngIf="msj.reactions" class="d-flex align-items-center justify-content-start "  >
+                              <div *ngFor="let reaccion of msj.reactions" >
+                                <img class="reaccion-icono" [src]="reaccion.icono" width="25px">
+                                <!-- Aquí puedes mostrar más información de la reacción si es necesario -->
+                              </div>
+                            </div>
+                            </div>
+                            <div class="comentarios-post" *ngIf="msj.comentariosPosts" >
+                              <div *ngFor="let comentarios of msj.comentariosPosts" class="comments-box mb-2" >
+                                <div [innerHTML]="sanitize(comentarios.comentario)" style="word-wrap: break-word "></div>
+                                <hr>
+                                <div class="d-flex" >
+                                  <small [style]=" 'color: '+ comentarios.colorcoment+';'" >{{comentarios.nombre}} - {{comentarios.email}} - {{comentarios.feccrea | date: 'short'}}</small> &nbsp;&nbsp;
+                                  <div class="baja m-1 " (click)="cambiarEstadoComentario(comentarios.idcomentario, 3)" >
+                                    <small>{{comentarios.cantidadReacciones}}</small> &nbsp; <i class="pi pi-thumbs-up-fill" [style]=" 'color: '+ comentarios.colorcoment+';'" ></i>
+                                  </div>
+                                  <div class="baja m-1 " *ngIf="msj.dislike" (click)="cambiarEstadoComentario(comentarios.idcomentario, 2)" >
+                                    <i class="pi pi-thumbs-down-fill" ></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                     </div>
+                </div>
+              </section>
+              </div>
+              </div>
+          </div>
+          <div class="toggle-dial" (click)="_show_speeddial = !_show_speeddial" cdkDrag ></div>
+          <div class="contarea d-flex justify-content-center flex-column align-items-center   p-4 animate__animated animate__backInDown"
+               *ngIf="_show_inputs"  >
+            <form [formGroup]="msjForm" class="forms p-2 d-flex flex-column" (ngSubmit)="onSubmit()" >
+              
+              <div class="w-100 d-flex justify-content-between  flex-wrap " >
+                <div class="data-columnas col-6" >
+                  <input type="text" class="textarea-console p-2 w-100"
+                         (focus)="onInputFocus()" (blur)="onInputBlur()"
+                         [ngStyle]="{'background-color': 'rgba(0, 0, 0, '+opacity_background+')'}"
+                         *ngIf="comment" [ngStyle]="{'color': _color_console_letras}"
+                         formControlName="title" 
+                         #title id="title" autofocus placeholder="TÍTULO">
+                </div>
+                <div class="data-columnas col-4">
+                  <input type="text" class="textarea-console p-2 w-100" *ngIf="comment" 
+                         [ngStyle]="{'background-color': 'rgba(0, 0, 0, '+opacity_background+')'}"
+                         (focus)="onInputFocus()" (blur)="onInputBlur()"
+                         formControlName="subtitle" [ngStyle]="{'color': _color_console_letras}"
+                         #subtitle id="subtitle" placeholder="SUBTÍTULO">
+                </div>
+              </div>
+              <div>
+                <textarea class="textarea-console p-2 w-100" 
+                          [rows]="height_console"  [ngStyle]="{'background-color': 'rgba(0, 0, 0, '+opacity_background+')'}"
+                          formControlName="description" #description id="description"
+                          [placeholder]="_placeholdermsj" 
+                          (focus)="onInputFocus()" (blur)="onInputBlur()"
+                          ></textarea>
+
+              </div>
+              <div class="btnsend d-flex">
+              <button type="button" (click)="cancelBtn()"
+                      class="animate__animated animate__FadeIn d-flex align-items-center"
+                      mat-mini-fab color="warn"
+                      *ngIf="viewbtncancel" >
+                <i class="pi pi-times-circle" ></i>
+              </button>
+              <button type="submit"
+                      mat-mini-fab color="accent"
+                      class=" d-flex align-items-center">
+                      <i [class]="iconbtn"></i>
+              </button>
+              </div>
+            </form>
+            <div class="d-flex  " >
+              <div class="w-50 p-2 d-flex justify-content-start" *ngIf="_range_setts">
+                <!-- <label for="customRange3" class="form-label text-light">
+                  Consola
+                </label> -->
+                <input type="range" class="form-range"
+                       [(ngModel)]="height_console"
+                       min="5"
+                       max="30"
+                       step="2"
+                       id="customRange3">
+              </div>
+              <div class="w-50 p-2 d-flex justify-content-start" *ngIf="_range_setts">
+                <!-- <label for="customRange3" class="form-label text-light">
+                  Consola
+                </label> -->
+                <input type="range" class="form-range"
+                       [(ngModel)]="opacity_background"
+                       min="0.1"
+                       max="1"
+                       step="0.1"
+                       id="customRange3">
+              </div>
+            </div>
+          </div>
+          <!-- <button mat-mini-fab color="primary" style="position: absolute; bottom: 12px; left: 10px; z-index: 2;" (click)="_show_inputs = !_show_inputs" >
+            <i class="pi pi-comment" ></i>
+          </button> -->
+          <p-speedDial *ngIf="_show_speeddial" [model]="items" [radius]="radiusValue" direction="up-right" type="quarter-circle" buttonClassName="animate__animated animate__fadeInLeft "></p-speedDial>
+</section>
+</section>
+
+</div>
+
+</section>
+

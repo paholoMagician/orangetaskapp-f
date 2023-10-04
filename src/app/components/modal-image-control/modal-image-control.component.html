@@ -1,0 +1,129 @@
+
+ <div class="d-flex flex-column " [ngStyle]="{'background': _color_console}" >
+    <div class="header d-flex justify-content-between  align-items-center flex-wrap p-3">
+        <div>
+            <h3 class="m-0" [ngStyle]="{'color': _color_console_letras}">
+                Cargar archivo
+            </h3>
+        </div>
+    </div>
+    <hr>
+    <div class="body p-3" [ngStyle]="{'color': _color_console_letras}">
+        
+        <div class="drive-orange p-3 mt-2 mb-2 bg-dark text-light rounded-3 ">
+            <input type="file" 
+                   class="form-control form-control-sm"
+                   accept=".mp4, .jpg, .jpeg, .png, .pdf, .xls, .xlsx, .txt, .doc, .mp3"
+                   (change)="onFileSelected($event)">
+                   <div class="d-flex justify-content-end">
+                     <div *ngIf="uploadProgress !== null">
+                        Progreso de la carga: {{ uploadProgress }}%
+                     </div>
+                     <div *ngIf="uploadMessage">
+                       {{ uploadMessage }}
+                     </div>
+                     <button class="btn btn-outline-warning d-flex align-items-center"
+                             [disabled]="!selectedFile"
+                             (click)="uploadFile()">
+                             <i class="pi pi-upload"></i> Subir archivo
+                     </button>
+                   </div>
+        </div>
+        
+        <div class="drive-orange p-3 mt-2 mb-2 bg-dark text-light rounded-3">
+            <div class="link-generate" >
+               <span class="text-secondary" > Link generado: </span> <span class="text-warning fs-5"> {{link_generate}}</span>
+            </div>
+        </div>
+
+        <div class="settings p-3 mt-2 mb-2 bg-dark text-light rounded-3 d-flex justify-content-end ">
+            <div class="form-check  m-2">
+              <input class="form-check-input" type="radio" [checked]="true" 
+                     name="opcion"
+                     id="link"
+                     [checked]="true"
+                     [(ngModel)]="selectedOption"
+                     value="link">
+                     <label class="form-check-label" for="link">
+                         Generar una etiqueta link de descarga
+                     </label>
+            </div>
+            <div class="form-check  m-2">
+              <input class="form-check-input"
+                     type="radio"
+                     name="opcion"
+                     id="view"
+                     [(ngModel)]="selectedOption"
+                     [disabled]="!isImageSelected"
+                     value="view">
+                     <label class="form-check-label"
+                            for="view">
+                            Generar visualización
+                     </label>
+            </div>
+        </div>
+        
+        <div class="btnsetts d-flex justify-content-end mt-2">
+            <button class="btn btn-warning d-flex align-items-center"  [disabled]="!selectedFile" (click)="closeDialog()">
+                <i class="pi pi-check"></i>&nbsp;Cargar archivo a la publicación
+            </button>
+        </div>
+    </div>
+    
+
+    </div>
+
+
+
+
+
+
+<!-- <div  [ngStyle]="{'background': _color_console, 'height': '600px'}" >
+    <div class="p-3" [ngStyle]="{'color': _color_console_letras}">
+        <h2 class="m-0" > Carga de imagenes </h2>
+    </div>
+    <hr>
+    <div class="d-flex" >
+
+        <div class="w-50 p-3 ">
+            <label for="fileUp" class="w-100 d-flex justify-content-center align-items-center  ">
+                <div class="perfil shadow-lg"
+                id="perfil"
+                [ngStyle]="{'width': _value_range_width+'px', 'height': _value_range_height+'px'}"
+                [style.background-image]="'url(' + reducedImageURL + ')'"></div>
+                <input type="file" style="opacity: 0;"
+                id="fileUp"
+                class="fileUp"
+                (change)="encodeImageFileAsURL('fileUp', 'PERFIL')"/>
+            </label>
+        </div>
+        <div>
+            <div>
+                <label for="customRange3"
+                       [ngStyle]="{'color': _color_console_letras}"
+                       class="form-label">
+                       Ancho de la imagen: {{_value_range_width}} px
+                </label>
+                <input type="range"
+                       class="form-range"
+                       min="200" 
+                       max="800" step="100"
+                       [(ngModel)]="_value_range_width"
+                       id="customRange3">
+            </div>
+            <div>
+                <label for="customRange3"
+                       [ngStyle]="{'color': _color_console_letras}"
+                       class="form-label"> 
+                       Alto de la imagen: {{_value_range_height}} px
+                </label>
+                <input type="range"
+                       class="form-range"
+                       min="200" 
+                       max="800" step="100"
+                       [(ngModel)]="_value_range_height"
+                       id="customRange3">
+            </div>
+        </div>
+    </div>
+</div> -->

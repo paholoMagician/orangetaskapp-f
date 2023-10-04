@@ -1,0 +1,41 @@
+.icon-choice{
+
+    width: 80px;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: ease all 0.5s;
+}
+
+.icon-choice:hover {
+    transition: ease all 0.5s;
+    background-color: rgb(37, 37, 37);
+    color: orange;
+    border: groove 1px orange;
+    width: 90px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.5);
+}
+
+.body {
+    height: 280.5px;
+    overflow: auto;
+}
+
+.filter {
+
+    width: 75%;
+
+}
+
+@media screen and ( max-width: 500px ) {
+    .filter {
+        width: 100%;
+    }
+}

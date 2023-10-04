@@ -1,0 +1,46 @@
+
+
+<div class="modulos" >
+    <div class="d-flex justify-content-center w-75 " >
+        <div class="d-flex flex-column " >
+            <div class="modbox shadow"  
+                 [ngStyle]="{'border': 'groove 1px orange'}"
+                 *ngFor="let modulos of listaModulos">
+                 <div class="d-flex justify-content-between align-items-center "
+                      (click)="setDescription(modulos)" (dblclick)="emitAppChoice(modulos)" > 
+                     <span class="p-1">
+                         <i [class]="'pi '+modulos.icon" style="font-size: 20pt;" ></i>
+                     </span>
+                     <span style="text-align: center;" class="p-1" >
+                         <strong> 
+                             {{ modulos.moduleName | uppercase }} 
+                         </strong>
+                     </span>
+                 </div>
+            </div>  
+        </div>
+        <div class="mb  d-flex flex-column">
+            <div class="modbox-desccription m-1">
+                <span class="fs-4 text-warning p-3 d-flex justify-content-between">
+                    <span> Descripción </span>
+                    <span class="text-secondary" > {{titlemod}} </span>
+                </span>
+                <hr style="border: solid 2px orange;" >
+                <span class="text-light" style="font-size: 12pt;" >
+                    <span>{{descriptionmod}}</span>
+                    <br>
+                    <span class="p-2">
+                        <ol>
+                            <li class="p-2"
+                                *ngFor="let detMod of listDetalleModulo"
+                                style="text-align: justify; border-bottom: dashed 1px gray;">
+                                {{detMod.listaDetalle}}
+                            </li>
+                        </ol>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+

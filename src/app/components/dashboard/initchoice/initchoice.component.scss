@@ -1,0 +1,38 @@
+.modbox {
+    margin: 5px;
+    transition: ease all 1s;
+    padding: 10px;
+    border-radius: 5px;
+    color: orange;
+    background-color: rgba(35, 35, 35, 0.292);
+}
+
+.modbox:hover { 
+    cursor: pointer;
+    color: orangered;
+    background-color: rgba(35, 35, 35, 0.489);
+}
+
+.modbox-desccription {
+    padding:            20px;
+    border-radius:      10px;
+    background-color: rgba(0, 0, 0, 0.288);
+    width:      500px;
+    max-height: 600px;
+    height:     600px;
+    overflow:   auto;
+}
+
+@media screen and ( max-width: '500px' ) {
+
+    .modbox-desccription {
+        display: none;
+    }
+    .modbox {
+        width: 100%;
+    }
+    .mb {
+        display: none;
+    }
+
+}

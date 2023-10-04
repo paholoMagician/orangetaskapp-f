@@ -1,0 +1,518 @@
+.textarea-console {
+    background-color: #1d1d1db3;
+    color: orange;
+    border-radius: 10px;
+    margin: 6px;
+    border: none;
+    font-size: 12pt;
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+}
+
+// :host ::ng-deep .p-element {
+//   background-color: orange !important;
+//   color: #444 !important;
+//   width:  40px !important;
+//   height: 40px !important;
+//   border-radius: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center; 
+// }
+
+:host ::ng-deep {
+  .p-element{
+    background-color: orange !important;
+    color: #544;
+    border-radius: 100% !important;
+  }
+  &
+  .speeddial-circle-demo {
+      .p-speeddial-quarter-circle {
+          &.p-speeddial-direction-up-left {
+              right: 0;
+              bottom: 0;
+          }
+
+          &.p-speeddial-direction-up-right {
+              left: 0;
+              bottom: 0;
+          }
+
+          &.p-speeddial-direction-down-left {
+              right: 0;
+              top: 0;
+          }
+
+          &.p-speeddial-direction-down-right {
+              left: 0;
+              top: 0;
+          }
+      }
+  }
+}
+
+
+
+
+.emot-contain {
+  width: 215px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:-webkit-scrollbar {
+    width: 7px !important;
+    height: 7px !important;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(227, 197, 3); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a86008; 
+  }
+
+
+.textarea-console::placeholder {
+    color: rgba(255, 166, 0, 0.704);
+}
+
+.contarea {
+    position: absolute;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.forms {
+  width: 75%;
+}
+
+.p-element {
+  position: absolute !important;
+  bottom: 90px !important;
+  left: 25px !important;
+}
+
+.btnsend {
+    width: 45px; height: 45px; position: absolute; bottom: 50px; right: 14%;
+}
+
+.btn-comu {
+
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+
+.out-comu-edit {
+  cursor: pointer;
+  transition: ease all 1s;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.out-comu-edit:hover{
+  width: 25px;
+  height: 25px;
+  border: solid 1px orange;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.7);
+  transition: ease all 1s;
+  color: orange;
+}
+
+.out-comu {
+  cursor: pointer;
+  transition: ease all 1s;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lista-user-community {
+  position: absolute;
+  left: 15px;
+  background-color: #444444e0;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.5);
+}
+
+
+.out-comu:hover {
+  width: 25px;
+  height: 25px;
+  border: solid 1px orangered;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.7);
+  transition: ease all 1s;
+  color: orangered;
+}
+
+@media screen and ( max-width: 800px ) {
+    .forms {
+        width: 100% !important;
+    }
+    .textarea-console {
+        font-size: 9pt;
+    }
+    .btnsend {
+        right: 7%;
+    }
+    .forms {
+      width: 100% !important;
+    }
+    .emoticones-imagenes {
+      width: 10px;
+      height: auto;
+    }
+    
+}
+
+.iconpi {
+  cursor: pointer;
+  transition: ease all 0.5s;
+}
+
+.iconpi:hover {
+  transition: ease all 0.5s;
+  color: orangered;
+}
+
+
+.msj {
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.342);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+}
+
+
+.box-community {
+    position:sticky;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background-color: #00000092;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.342);
+    overflow: auto;
+    z-index: 200;
+  }
+
+.contsection {
+  border-radius: 6px;
+  border: groove 2px gray;
+}
+
+.carga {
+  background-color: #000000;
+  border-radius: 5px;
+  border: groove 2px gray;
+  transition: ease-in-out 2s;
+}
+
+.colorp {
+  width: 20px;
+  height: 20px;
+}
+
+.msjview {
+    height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.msj {
+    box-shadow: 2px 2px 10px rgba($color: #000000, $alpha: 0.5);
+}
+
+.title-request {
+  border: groove 1px #444;
+  box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.7);
+}
+
+.iconpi {
+    background-color: rgba(28, 28, 28, 0.536);
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.colopick {
+    background-color: rgba(28, 28, 28, 0.536);
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease all 0.5s;
+    cursor: pointer;
+    border: groove 1px gray;
+    box-shadow: 0px 0px 5px rgba($color: #000000, $alpha: 0.7);
+}
+
+
+
+.colopick:hover{
+    transition: ease all 0.5s;
+    transform: scale(1.1);
+    border: groove 1px orange;
+    box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.7);
+}
+
+.colopick.active {
+  transition: ease all 0.5s;
+  transform: scale(1.1);
+  border: groove 1px orange;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.toggle-dial {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: orangered;
+  transition: ease all 0.5s;
+  position: absolute;
+  bottom: 90px;
+  right: 25px;
+}
+
+.toggle-dial:hover {
+  transition: ease all 0.5s;
+  cursor: pointer;
+  background-color: orange;
+  
+}
+
+@media screen and ( max-width: 550px ) {
+
+  .contentreacctions {
+    max-width: 300px;
+    min-width: 200px;
+  }
+
+  .desmsj {
+    max-width: 300px;
+    overflow-x: auto;
+  }
+
+  .emoticones-imagenes{
+    width: 20px;
+    height: 20px;
+  }
+
+  .contendatauser {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .bienvenido {
+    width: 100%;
+    text-align: right;
+  }
+
+}
+
+@media screen and ( max-width: 420px ) {
+
+  .contentreacctions {
+    max-width: 70%;
+  }
+
+  .desmsj {
+    max-width: 70%;
+    overflow-x: auto;
+  }
+
+  .emoticones-imagenes{
+    width: 15px;
+    height: 15px;
+  }
+
+}
+
+@media screen and ( max-width: 650px ) {
+  
+  .btnsend {
+    right: 2%;
+    bottom: 20px;
+  }
+
+  .box-community {
+    // width: 80px !important;
+    position: absolute;
+    width: 100% !important;
+    top: 0px;
+    left: 0px;
+    z-index: 200;
+  }
+  .module-title {
+    display: none;
+  }
+
+  .msjview {
+    padding: 5px !important;
+  }
+
+  .msj {
+    margin: 0px !important;
+    margin-top: 5px !important;
+
+  }
+
+  .boton-salir {
+    display: inherit;
+    opacity: 1;
+  }
+
+  .contarea {
+    // border: solid 1px red;
+    position: absolute;
+    left:    10px;
+    bottom:  0px;
+    padding: 0px !important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 90%;
+  }
+
+  .data-columnas {
+    width: 100% !important;
+  }
+
+}
+
+
+
+.btn-menu {
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  z-index: 201;
+}
+
+
+  .listsusers {
+    list-style: none;
+    margin-top: 5px;
+    padding: 10px;
+    border-bottom: solid 1px white;
+    border-radius: 0px;
+    transition: ease all 0.5s;
+    cursor: pointer;
+  }
+
+
+  .listsusers:hover{
+    transition: ease all 0.5s;
+    background-color: #00000075;
+    border-radius: 10px;
+  }
+
+  .persons-invite {
+    background-color: #0000007e;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+.emot {
+  transition: ease all 0.5s;
+  cursor: pointer;
+  // animation: animemot ease-in 1s 2;
+}
+
+.emot:hover {
+  transition: ease all 0.5s;
+  transform: scale(1.2);
+  // transform: rotate(0deg);
+  // transform: rotate(45deg);
+  // transform: rotate(-45deg);
+  // transform: rotate(0deg);
+}
+
+.comments-box {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #00000063;
+  border-radius: groove 1px gray;
+}
+
+.emoticones-imagenes {
+  width: 40px;
+  height: auto;
+}
+
+.baja {
+  cursor: pointer;
+  transition: ease all 0.5s;
+  color: orange;
+}
+
+.baja:hover{
+    transition: ease all 0.5s;
+    transform: rotate(-25deg);
+    color: orangered
+}
+
+// @keyframes animemot {
+
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   50% {
+//     transform: rotate(-90deg);
+//   }
+//   100% {
+//     transform: rotate(90deg);
+//   }
+
+// }
+
+.emot-contain {
+  background-color: #ffffff30;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.5);
+}
+

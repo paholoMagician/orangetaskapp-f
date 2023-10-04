@@ -1,0 +1,26 @@
+{
+  "hosting": {
+    "public": "dist/orangeapp",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+
+
+
+
+
+
+
+
+
+      
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

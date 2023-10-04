@@ -1,0 +1,167 @@
+<div class="d-flex flex-column " [ngStyle]="{'background': _color_console}" >
+    <div class="header w-100 d-flex justify-content-between  align-items-center flex-wrap p-2">
+        <div class="d-flex justify-content-between  flex-wrap align-items-center w-100 ">
+          <div class=" headbox">
+              <h3 class="m-0" [ngStyle]="{'color': _color_console_letras}">
+                  Crear listas
+              </h3>
+          </div>
+          <div class=" d-flex justify-content-end rounded-pill p-2 " style="background-color: rgba(0, 0, 0, 0.559);" >
+            <div class="form-check m-2">
+                <input class="form-check-input" 
+                       type="checkbox"
+                       id="checkboxCantidad"
+                       [disabled]="checkbox_dis"
+                       [(ngModel)]="cantidadChecked">
+                       <label class="form-check-label"
+                              [ngStyle]="{'color': _color_console_letras}"
+                              for="checkboxCantidad">
+                              Cantidad
+                       </label>
+              </div>
+              <div class="form-check m-2">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="checkboxTotal"
+                       [disabled]="checkbox_dis"
+                       [(ngModel)]="totalChecked">
+                       <label class="form-check-label" 
+                              [ngStyle]="{'color': _color_console_letras}"
+                              for="checkboxTotal">
+                              Total
+                       </label>
+              </div>
+              <div class="form-check m-2">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="presupuestoChecked"
+                       [disabled]="checkbox_dis"
+                       [(ngModel)]="presupuestoChecked">
+                       <label class="form-check-label"
+                              [ngStyle]="{'color': _color_console_letras}"
+                              for="presupuestoChecked">
+                              Presupuesto
+                       </label>
+              </div>
+          </div>
+        </div>
+        <div class="headbox d-flex flex-column w-75">
+          <label class="m-1" [ngStyle]="{'color': _color_console_letras}" for="cantidad">Agrega un Título a tu lista</label>
+          <input [(ngModel)]="titulo_lista"
+
+                   id="titulo"
+                   class="inputsearch w-100 bg-dark text-warning rounded-pill p-2"
+                   style="text-align: center;"
+                   placeholder="...Lista de comida">
+        </div>
+        <div class="indatalistanum d-flex flex-column p-2"
+             *ngIf="presupuestoChecked">
+             <label class="m-1" [ngStyle]="{'color': _color_console_letras}" for="cantidad">Presupuesto</label>
+             <input [(ngModel)]="_pressupuesto"
+                    (focus)="onInputFocus()" (blur)="onInputBlur()"
+                    (keyup)="sumatoriaListas()"
+                    type="number"
+                    class="inputsearch bg-dark text-warning rounded-pill p-2"
+                    style="width: 100px; text-align: center;"
+                    id="cantidad"
+                    placeholder="">                           
+        </div>
+    </div>
+    <!-- <hr> -->
+    <div class="body p-2" [ngStyle]="{'color': _color_console_letras}">
+        
+        <div class="drive-orange p-2 mt-1 mb-2 bg-dark text-light rounded-3">
+            <div class="d-flex flex-column" >
+                <div class="w-100 inputlistas p-2 d-flex justify-content-between align-items-center flex-wrap">
+                    <div class="datalistanum d-flex justify-content-between flex-wrap" >
+                    
+                    <div class="indatalistanum d-flex flex-column p-2"
+                         *ngIf="cantidadChecked">
+                         <label for="cantidad">Agregar cantidad</label>
+                         <input [(ngModel)]="cantidad"
+                                type="number"
+                                (focus)="onInputFocus()" (blur)="onInputBlur()"
+                                class="inputsearch bg-dark text-warning rounded-pill p-2"
+                                style="width: 100px; text-align: center;"
+                                id="cantidad"
+                                placeholder="">                           
+                    </div>
+                    <div class="indatalistanum d-flex flex-column p-2 "
+                         *ngIf="totalChecked">
+                         <label for="valor">Agregar valor</label>
+                         <input [(ngModel)]="valor"
+                                type="number"
+                                id="valor"
+                                (focus)="onInputFocus()" (blur)="onInputBlur()"
+                                class="inputsearch bg-dark text-warning rounded-pill p-2"
+                                style="width: 100px; text-align: center;"
+                                placeholder="">
+                    </div>
+                    </div>
+                    <div class="indatalista d-flex flex-column w-50 p-2" >
+                    <label for="item">Agregar Item</label>
+                    <input [(ngModel)]="nuevoElemento"
+                           id="item"
+                           class="inputsearch w-100 bg-dark text-warning rounded-pill p-2"
+                           style="text-align: center;"
+                           placeholder="Ingrese un elemento">
+                    </div>
+                    <button (click)="agregarElemento()"
+                            class="indatalistabtn btn btn-warning d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px; border-radius: 100%;">
+                            <i class="pi pi-plus-circle"></i> &nbsp;
+                    </button>
+                </div>
+                <div *ngIf="elementos.length > 0">
+                  <h3>Lista Generada:</h3>
+                  <div class=" d-flex flex-column bg-light " >
+                    <div class="text-secondary w-100 d-flex justify-content-between align-items-center fs-3 pt-3" >
+                      <div> {{this.titulo_lista | uppercase }}  </div>
+                      <div *ngIf="presupuestoChecked"> <small> Presupuesto: </small> $ {{this._pressupuesto | number:'1.2-2' }} / <span [ngStyle]="{'color': colorpresupuesto}" > $ {{this._pressupuesto - cantidadTodal | number:'1.2-2'}} </span> </div>
+                    </div>
+                    <hr>
+                  <ul class="list-group">
+                  <li class="list-group-item d-flex flex-column p-2" *ngFor="let lista of elementos; let i = index" (click)="eliminarItem(i)" >
+                    <div *ngIf="cantidadChecked"  class="d-flex justify-content-between" style="border-bottom: dashed 1px gray"> 
+                      <small>Cantidad: </small>
+                       <span>
+                        <strong>{{lista.cantidad}}</strong></span>      
+                      </div>
+                    <div class="d-flex justify-content-between" style="border-bottom: dashed 1px gray"> 
+                      <small>Nombre: </small>
+                         <span>
+                        <strong>{{lista.nombre}}</strong></span>        
+                      </div>
+                    <div *ngIf="totalChecked" 
+                         class="d-flex justify-content-between" 
+                         style="border-bottom: dashed 1px gray"> 
+                      <small>Valor U.:</small>
+                        <span>
+                        <strong>$ {{lista.valorUnitario | number:'1.2-2'}}</strong></span> 
+                      </div>
+                    <div *ngIf="totalChecked" 
+                         class="d-flex justify-content-between" 
+                         style="border-bottom: dashed 1px gray"> 
+                      <small>Total: </small>
+                          <span>
+                        <strong class="text-success fs-3" >$ {{lista.valor | number:'1.2-2'}}</strong></span>         
+                      </div>
+                  </li>
+                </ul>
+                <div *ngIf="totalChecked" class=" rounded-3 bg-warning text-dark p-2 fs-2 w-100 d-flex justify-content-end " >
+                  <span>
+                    <span> TOTAL: </span> &nbsp; 
+                      <strong>$ {{cantidadTodal | number:'1.2-2'}} </strong>
+                    </span>
+                </div>
+                </div>
+              </div>
+        </div>
+        <div class="btnsetts d-flex justify-content-end mt-2" style="position: sticky; bottom: 5px; left: 15px;">
+            <button  class="d-flex btn btn-primary rounded-pill  justify-content-center align-items-center"  (click)="closeDialog(1)">
+                <i class="pi pi-check"></i>&nbsp; Agregar lista al mensaje
+            </button>
+        </div>
+        
+    </div>
+</div>

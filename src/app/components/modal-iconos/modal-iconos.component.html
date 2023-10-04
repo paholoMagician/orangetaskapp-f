@@ -1,0 +1,31 @@
+<div class="d-flex flex-column " [ngStyle]="{'background': _color_console}" >
+<div class="header d-flex justify-content-between  align-items-center flex-wrap p-3">
+    <div>
+        <h3 class="m-0" [ngStyle]="{'color': _color_console_letras}">
+            Escoger Iconos
+        </h3>
+    </div>
+    <div class="filter p-2 ">
+        <input type="text"
+               class="inputsearch w-100 bg-dark text-warning rounded-pill p-2  "
+               [(ngModel)]="filter"
+               (keyup)="filternotes()" placeholder="Filtrar icono" >
+    </div>    
+</div>
+<hr>
+<div class="body">
+    
+    <div class="icon-body d-flex justify-content-between flex-wrap p-3   " >
+        <div class="icon-choice m-1 animate__animated animate__bounceIn"
+                (click)="closeDialog(icon.icon)"
+             *ngFor="let icon of gicons" 
+             [ngStyle]="{'color': _color_console_letras}">
+             <i [class]="icon.icon" ></i>
+             <span> {{icon.name}} </span>
+        </div>  
+    </div>
+</div>
+
+
+</div>
+

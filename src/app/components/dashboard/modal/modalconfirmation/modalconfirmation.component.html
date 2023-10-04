@@ -1,0 +1,30 @@
+<div class="confirmation p-3">
+    <section class="header">
+      <strong class="text-danger">CONFIRMACIÓN REQUERIDA</strong>
+    </section>
+    <hr>
+    <section class="bodyrequest">
+      <form [formGroup]="confirmationForm">
+        <div class="col">
+          <label>
+            Para eliminar esta tarea debes confirmar que realmente deseas eliminarla. Por seguridad cuidamos tus datos.
+            <span>Escribir la palabra <strong class="text-danger">{{token}}</strong></span>
+          </label>
+          <input
+            type="text"
+            class="textarea-console mt-2 p-2"
+            formControlName="seguridad"
+            style="width: 100% !important; text-align: center;"
+            #seguridad
+            id="seguridad"
+            placeholder="seguridad de datos"
+            (keyup)="onInputKeyUp($event)"
+          >
+        </div>
+        <button class="btn btn-danger btn-sm w-100 mt-3" [disabled]="_btn_tarea" (click)="closeDialog()">
+          <i class="pi pi-trash"></i> Eliminar tarea
+        </button>
+      </form>
+    </section>
+  </div>
+  
